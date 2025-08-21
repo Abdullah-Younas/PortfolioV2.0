@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bsubbtsmarnen"]
+[gd_scene load_steps=14 format=3 uid="uid://bsubbtsmarnen"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_h7eii"]
 [ext_resource type="Texture2D" uid="uid://dddpyqqs7hvuo" path="res://Assets/Models/Rifle/rifle1Color.png" id="2_5xne6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cfn480kqajxfb" path="res://Assets/Models/Rifle/rifleAmbient_Occlusion.png" id="3_rpjwd"]
 [ext_resource type="Texture2D" uid="uid://c4p6em1ujgqla" path="res://Assets/Models/Rifle/rifle1fMetallic.png" id="4_5cvap"]
 [ext_resource type="Texture2D" uid="uid://wlagakkhsm03" path="res://Assets/Models/Rifle/rifle1Roughness.png" id="5_opkox"]
+[ext_resource type="FontFile" uid="uid://ck7n44exy53bg" path="res://Assets/Extra/Assets/Fonts/Gamer.ttf" id="7_mo4ye"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_m6trh"]
 
@@ -85,7 +86,7 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_tsi4i")
 
 [node name="BulletSpawn" type="Node3D" parent="Head/Camera3D/Rifle"]
-transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, -0.00215828, -0.0621224, 0.603669)
+transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, -0.00215828, 0.0197135, 0.561396)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8
@@ -101,3 +102,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_e00io")
 expand_mode = 1
+
+[node name="FPS" type="Label" parent="."]
+offset_left = 37.0
+offset_top = 19.0
+offset_right = 317.0
+offset_bottom = 118.0
+theme_override_fonts/font = ExtResource("7_mo4ye")
+theme_override_font_sizes/font_size = 111
+text = "FPS 150"

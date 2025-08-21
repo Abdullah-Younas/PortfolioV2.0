@@ -24,7 +24,9 @@ var pitch := 0.0
 @onready var camera_3d = $Head/Camera3D
 @onready var rifle = $Head/Camera3D/Rifle
 @onready var bullet_spawn = $Head/Camera3D/Rifle/BulletSpawn
+@onready var fps = $FPS
 var BUL = load("res://bullet.tscn")
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -39,6 +41,7 @@ func _unhandled_input(event):
 		camera_3d.rotation.x = pitch
 
 func _physics_process(delta):
+	fps.text = "FPS: " + str(Engine.get_frames_per_second())
 	if not is_on_floor():
 		speed_multiplier = AIR_SPEED_MULT
 		velocity.y -= gravity * delta
