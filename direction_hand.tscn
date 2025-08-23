@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfj7pgrv7hgb5"]
+[gd_scene load_steps=9 format=3 uid="uid://dfj7pgrv7hgb5"]
 
 [ext_resource type="Texture2D" uid="uid://4k7x3gkp2lnw" path="res://Assets/Models/Mushroom/Arrow_internal_ground_ao_texture.png" id="1_m2ftq"]
+[ext_resource type="Script" path="res://direction_hand.gd" id="1_yije8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_drhar"]
 
@@ -47,7 +48,8 @@ shadow_mesh = SubResource("ArrayMesh_lkqw6")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8kca"]
 albedo_color = Color(0, 0.843137, 0.407843, 1)
 
-[node name="DirectionHand" type="StaticBody3D"]
+[node name="DirectionHand" type="Area3D"]
+script = ExtResource("1_yije8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 1.9, 0.154132, 0, 0)
@@ -55,7 +57,7 @@ visible = false
 mesh = SubResource("BoxMesh_drhar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 1.9, 0.154132, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.154132, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_e0vg5")
 
 [node name="Arrow" type="Node3D" parent="."]
@@ -66,3 +68,5 @@ transform = Transform3D(1, 0, 0, 0, -3.57628e-07, -1, 0, 1, -3.57628e-07, 0, 0, 
 mesh = SubResource("ArrayMesh_mevg1")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_o8kca")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

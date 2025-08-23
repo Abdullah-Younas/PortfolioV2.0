@@ -85,8 +85,8 @@ mesh = SubResource("ArrayMesh_alyl4")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_tsi4i")
 
-[node name="BulletSpawn" type="Node3D" parent="Head/Camera3D/Rifle"]
-transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, -0.00215828, 0.0197135, 0.561396)
+[node name="BulletSpawn" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(-0.999848, 0, -0.0174525, 0, 1, 0, 0.0174525, 0, -0.999848, 0.366158, -0.0962865, -0.951396)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8

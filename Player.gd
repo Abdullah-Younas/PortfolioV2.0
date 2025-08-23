@@ -23,7 +23,7 @@ var pitch := 0.0
 @onready var head = $Head
 @onready var camera_3d = $Head/Camera3D
 @onready var rifle = $Head/Camera3D/Rifle
-@onready var bullet_spawn = $Head/Camera3D/Rifle/BulletSpawn
+@onready var bullet_spawn = $Head/Camera3D/BulletSpawn
 @onready var fps = $FPS
 var BUL = load("res://bullet.tscn")
 
