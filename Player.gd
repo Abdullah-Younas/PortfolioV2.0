@@ -23,11 +23,12 @@ var pitch := 0.0
 @onready var head = $Head
 @onready var camera_3d = $Head/Camera3D
 @onready var rifle = $Head/Camera3D/Rifle
-@onready var bullet_spawn = $Head/Camera3D/BulletSpawn
 @onready var fps = $FPS
 var BUL = load("res://bullet.tscn")
+@onready var ray_cast_3d = $Head/Camera3D/RayCast3D
 
 func _ready():
+	add_to_group("Player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event):
@@ -64,10 +65,10 @@ func _physics_process(delta):
 		tilt_angle = 0.0
 		
 	if Input.is_action_just_pressed("Shoot"):
-		var BInst = BUL.instantiate()
-		BInst.position = bullet_spawn.global_position
-		BInst.transform.basis = bullet_spawn.global_transform.basis
-		get_parent().add_child(BInst)
+		var collider = ray_cast_3d.get_collider()
+		if collider and collider.is_in_group("direction_arrows"):
+			print(collider)
+			collider.queue_free()  # Destroys the object
 
 
 	var current_angle = camera_3d.rotation.z

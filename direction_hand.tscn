@@ -49,19 +49,20 @@ shadow_mesh = SubResource("ArrayMesh_lkqw6")
 albedo_color = Color(0, 0.843137, 0.407843, 1)
 
 [node name="DirectionHand" type="Area3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 script = ExtResource("1_yije8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 1.9, 0.154132, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 visible = false
 mesh = SubResource("BoxMesh_drhar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.154132, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_e0vg5")
 
 [node name="Arrow" type="Node3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.248972, -0.204561, 0)
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, 0, -0.35, 0)
 
 [node name="RTJ4_hands_highRes" type="MeshInstance3D" parent="Arrow"]
 transform = Transform3D(1, 0, 0, 0, -3.57628e-07, -1, 0, 1, -3.57628e-07, 0, 0, 0)
@@ -69,4 +70,9 @@ mesh = SubResource("ArrayMesh_mevg1")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_o8kca")
 
+[node name="LifeTime" type="Timer" parent="."]
+wait_time = 15.0
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]
