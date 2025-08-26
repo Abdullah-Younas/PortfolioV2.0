@@ -88,6 +88,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_tsi4i")
 [node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.1, -0.95)
 target_position = Vector3(0, -100, 0)
+collide_with_areas = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8

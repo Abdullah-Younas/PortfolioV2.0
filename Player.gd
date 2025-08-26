@@ -66,9 +66,15 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("Shoot"):
 		var collider = ray_cast_3d.get_collider()
-		if collider and collider.is_in_group("direction_arrows"):
-			print(collider)
-			collider.queue_free()  # Destroys the object
+		if collider:
+			var arrow_node = collider
+			if not arrow_node.is_in_group("direction_arrows") and arrow_node.get_parent():
+				arrow_node = arrow_node.get_parent()
+
+			if arrow_node.is_in_group("direction_arrows"):
+				print("hit arrow")
+				arrow_node.make_static()
+
 
 
 	var current_angle = camera_3d.rotation.z
