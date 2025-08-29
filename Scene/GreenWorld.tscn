@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://brt3r0e6gqf36"]
+
+[ext_resource type="Texture2D" uid="uid://bfugde68fu0u8" path="res://Assets/Textures/Green.png" id="1_1rbgi"]
+[ext_resource type="PackedScene" uid="uid://bsubbtsmarnen" path="res://Scene/player.tscn" id="2_c2k3i"]
+[ext_resource type="PackedScene" uid="uid://dw82pynviaye8" path="res://Assets/Models/Fractured/Cube.tscn" id="3_7w0ek"]
+[ext_resource type="PackedScene" uid="uid://ctln2cxsyfg5t" path="res://Assets/Models/Fractured/Cone.tscn" id="4_6yms8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_va26u"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_energy_multiplier = 1.35
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_pi45i"]
+sky_material = SubResource("ProceduralSkyMaterial_va26u")
+
+[sub_resource type="Environment" id="Environment_r702b"]
+background_mode = 1
+background_color = Color(0.167969, 0.996094, 0.617188, 1)
+sky = SubResource("Sky_pi45i")
+ambient_light_source = 2
+ambient_light_color = Color(0.167969, 0.996094, 0.617188, 1)
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ap48b"]
+albedo_color = Color(1, 0.783813, 0.700259, 1)
+albedo_texture = ExtResource("1_1rbgi")
+uv1_scale = Vector3(5, 5, 5)
+
+[node name="GreenWorld" type="Node3D"]
+transform = Transform3D(1.03644, 0, 0, 0, 1.03644, 0, 0, 0, 1.03644, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r702b")
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(8.88613, 0, 0, 0, 8.88613, 0, 0, 0, 8.88613, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ap48b")
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(9, 0.01, 9)
+
+[node name="Player" parent="." instance=ExtResource("2_c2k3i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96484, 0)
+
+[node name="Cube" parent="." instance=ExtResource("3_7w0ek")]
+transform = Transform3D(0.903888, 0.427768, 0, -0.427768, 0.903888, 0, 0, 0, 1, -5.67384, 16.7767, -6.9984)
+
+[node name="Cube2" parent="." instance=ExtResource("3_7w0ek")]
+transform = Transform3D(0.903888, 0.427768, 0, -0.427768, 0.903888, 0, 0, 0, 1, 6.51212, 15.3055, -6.9984)
+
+[node name="Cube3" parent="." instance=ExtResource("3_7w0ek")]
+transform = Transform3D(0.903888, 0.427768, 0, -0.427768, 0.903888, 0, 0, 0, 1, -5.16711, 7.64256, -6.9984)
+
+[node name="Cube4" parent="." instance=ExtResource("3_7w0ek")]
+transform = Transform3D(0.903888, 0.427768, 0, -0.427768, 0.903888, 0, 0, 0, 1, 5.99046, 7.64256, -6.9984)
+
+[node name="Cube5" parent="." instance=ExtResource("3_7w0ek")]
+transform = Transform3D(0.903888, 0.427768, 0, -0.427768, 0.903888, 0, 0, 0, 1, 1.04469, 13.9832, -6.9984)
+
+[node name="Cube6" parent="." instance=ExtResource("3_7w0ek")]
+transform = Transform3D(0.903888, 0.427768, 0, -0.427768, 0.903888, 0, 0, 0, 1, 1.04469, 10.6506, -6.9984)
+
+[node name="Cone" parent="." instance=ExtResource("4_6yms8")]
+transform = Transform3D(0.910531, -0.413438, 0, 0.413438, 0.910531, 0, 0, 0, 0.999999, 0, 17.0603, -13.0971)
+
+[node name="Cone2" parent="." instance=ExtResource("4_6yms8")]
+transform = Transform3D(0.977907, 0.179844, -0.10655, -0.209038, 0.841334, -0.498456, 0, 0.509717, 0.860341, -15.5362, 23.0763, -5.75237)
+
+[node name="Cone3" parent="." instance=ExtResource("4_6yms8")]
+transform = Transform3D(0.719291, 0.694708, 0, -0.694708, 0.719291, 0, 0, 0, 0.999999, 9.92567, 6.11974, -5.05068)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctln2cxsyfg5t"]
+
+[ext_resource type="Script" path="res://Breakable.gd" id="1_4xi55"]
+[ext_resource type="PackedScene" uid="uid://b7r0my4q2b7mj" path="res://Assets/Models/Fractured/ConeFractured.glb" id="1_q6kxr"]
+[ext_resource type="PackedScene" uid="uid://dvqxef0nxg7ij" path="res://Scene/ConeFractured.tscn" id="2_mphkf"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y740m"]
+height = 6.50713
+radius = 2.04118
+
+[node name="Cone" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_4xi55")
+breakable_scene = ExtResource("2_mphkf")
+
+[node name="ConeFractured" parent="." instance=ExtResource("1_q6kxr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_y740m")

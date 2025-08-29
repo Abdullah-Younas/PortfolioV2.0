@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw82pynviaye8"]
+
+[ext_resource type="Script" path="res://Breakable.gd" id="1_nsq5q"]
+[ext_resource type="PackedScene" uid="uid://i5lllm2t3ib2" path="res://Scene/CubeFractured.tscn" id="2_p2c2c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hthhn"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r2og5"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Cube" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_nsq5q")
+breakable_scene = ExtResource("2_p2c2c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("BoxMesh_hthhn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_r2og5")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

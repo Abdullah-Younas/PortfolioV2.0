@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bf18y712jnurw"
-path="res://.godot/imported/Arrow.glb-50fa0ebf73bffbeb7cd2970f0f370fb5.scn"
+uid="uid://b7r0my4q2b7mj"
+path="res://.godot/imported/ConeFractured.glb-76f485aa9620ddff3fed58737a72b5d6.scn"
 
 [deps]
 
-source_file="res://Assets/Models/Mushroom/Arrow.glb"
-dest_files=["res://.godot/imported/Arrow.glb-50fa0ebf73bffbeb7cd2970f0f370fb5.scn"]
+source_file="res://Assets/Models/Fractured/ConeFractured.glb"
+dest_files=["res://.godot/imported/ConeFractured.glb-76f485aa9620ddff3fed58737a72b5d6.scn"]
 
 [params]
 

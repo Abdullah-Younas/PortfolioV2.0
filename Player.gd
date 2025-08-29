@@ -24,7 +24,6 @@ var pitch := 0.0
 @onready var camera_3d = $Head/Camera3D
 @onready var rifle = $Head/Camera3D/Rifle
 @onready var fps = $FPS
-var BUL = load("res://bullet.tscn")
 @onready var ray_cast_3d = $Head/Camera3D/RayCast3D
 
 func _ready():
@@ -65,18 +64,16 @@ func _physics_process(delta):
 		tilt_angle = 0.0
 		
 	if Input.is_action_just_pressed("Shoot"):
-		var collider = ray_cast_3d.get_collider()
-		if collider:
-			var arrow_node = collider
-			if not arrow_node.is_in_group("direction_arrows") and arrow_node.get_parent():
-				arrow_node = arrow_node.get_parent()
+		ray_cast_3d.force_raycast_update()
+		
+		if ray_cast_3d.is_colliding():
+			var collider = ray_cast_3d.get_collider()
+			print("Hit: ", collider.name)
 
-			if arrow_node.is_in_group("direction_arrows"):
-				print("hit arrow")
-				arrow_node.make_static()
-
-
-
+			# If the hit object has a break_object() function, call it
+			if collider.has_method("break_object"):
+				collider.break_object()
+		
 	var current_angle = camera_3d.rotation.z
 	camera_3d.rotation.z = lerp(current_angle, tilt_angle, delta * tilt_speed)
 
