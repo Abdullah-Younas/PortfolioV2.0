@@ -1,102 +1,63 @@
 extends CharacterBody3D
 
-const SPEED = 8.0
-const GROUND_SPEED_MULT = 1.0
-const AIR_SPEED_MULT = 1.5
-var speed_multiplier := GROUND_SPEED_MULT
-
-const JUMP_VELOCITY = 6.5
-var JUMP_COUNT = 2
 var SENS = 0.005
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
-const BOB_FREQ = 2.0
-const BOB_AMP = 0.08
-var t_bob = 0.0
-
-var tilt_angle := 0.0
-var tilt_speed := 5.0
-
 # store pitch manually
 var pitch := 0.0
+var yaw := 0.0
+var FocusMode := false
+var focus_speed := 5.0 # higher = faster snap
 
 @onready var head = $Head
 @onready var camera_3d = $Head/Camera3D
-@onready var rifle = $Head/Camera3D/Rifle
 @onready var fps = $FPS
-@onready var ray_cast_3d = $Head/Camera3D/RayCast3D
+@onready var low_poly_office_chair = $low_poly_office_chair
 
 func _ready():
 	add_to_group("Player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
-		# yaw (head left/right)
-		head.rotate_y(-event.relative.x * SENS)
+	if event is InputEventMouseMotion and !FocusMode:
+		# yaw (head + chair left/right)
+		yaw -= event.relative.x * SENS
+		yaw = clamp(yaw, deg_to_rad(-65), deg_to_rad(65))
+		head.rotation.y = yaw
+		low_poly_office_chair.rotation.y = yaw + deg_to_rad(180)  # 👈 add 180° offset
 
-		# pitch (camera up/down)
+		# pitch (camera up/down, chair stays fixed)
 		pitch -= event.relative.y * SENS
-		pitch = clamp(pitch, deg_to_rad(-80), deg_to_rad(90))
+		pitch = clamp(pitch, deg_to_rad(-50), deg_to_rad(20))
 		camera_3d.rotation.x = pitch
+	
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			camera_3d.fov = clamp(camera_3d.fov - 5, 20, 120)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			camera_3d.fov = clamp(camera_3d.fov + 5, 20, 120)
+
+	if Input.is_action_just_pressed("FocusComp"):
+		FocusMode = true
+	elif Input.is_action_just_released("FocusComp"):
+		FocusMode = false
 
 func _physics_process(delta):
 	fps.text = "FPS: " + str(Engine.get_frames_per_second())
-	if not is_on_floor():
-		speed_multiplier = AIR_SPEED_MULT
-		velocity.y -= gravity * delta
-	else:
-		speed_multiplier = GROUND_SPEED_MULT
-		JUMP_COUNT = 2
-
-	if Input.is_action_just_pressed("JUMP") and JUMP_COUNT > 0:
-		JUMP_COUNT -= 1
-		velocity.y = JUMP_VELOCITY
 
 	if Input.is_action_just_pressed("ExitDebug"):
 		get_tree().quit()
-
-	if Input.is_action_pressed("MoveLeft"):
-		tilt_angle = deg_to_rad(7)
-	elif Input.is_action_pressed("MoveRight"):
-		tilt_angle = deg_to_rad(-7)
-	else:
-		tilt_angle = 0.0
 		
-	if Input.is_action_just_pressed("Shoot"):
-		ray_cast_3d.force_raycast_update()
-		
-		if ray_cast_3d.is_colliding():
-			var collider = ray_cast_3d.get_collider()
-			print("Hit: ", collider.name)
+	if FocusMode:
+		# Smooth yaw → 0
+		yaw = lerp_angle(yaw, 0.0, delta * focus_speed)
+		head.rotation.y = yaw
+		low_poly_office_chair.rotation.y = yaw + deg_to_rad(180)
 
-			# If the hit object has a break_object() function, call it
-			if collider.has_method("break_object"):
-				collider.break_object()
-		
-	var current_angle = camera_3d.rotation.z
-	camera_3d.rotation.z = lerp(current_angle, tilt_angle, delta * tilt_speed)
+		# Smooth pitch → 0
+		pitch = lerp_angle(pitch, 0.0, delta * focus_speed)
+		camera_3d.rotation.x = pitch
 
-	var input_dir = Input.get_vector("MoveLeft", "MoveRight", "MoveForward", "MoveBackward")
-	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		# stop when close enough
+		if abs(yaw) < 0.001 and abs(pitch) < 0.001:
+			yaw = 0.0
+			pitch = 0.0
 
-	if is_on_floor():
-		if direction:
-			velocity.x = direction.x * SPEED * speed_multiplier
-			velocity.z = direction.z * SPEED * speed_multiplier
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED * speed_multiplier)
-			velocity.z = move_toward(velocity.z, 0, SPEED * speed_multiplier)
-	else:
-		velocity.x = lerp(velocity.x, direction.x * SPEED * speed_multiplier, delta * 1.0)
-		velocity.z = lerp(velocity.z, direction.z * SPEED * speed_multiplier, delta * 1.0)
-
-	t_bob += delta * velocity.length() * float(is_on_floor())
-	camera_3d.transform.origin = _headBob(t_bob / 1.5)
-
-	move_and_slide()
-
-func _headBob(time) -> Vector3:
-	var pos = Vector3.ZERO
-	pos.y = sin(time * BOB_FREQ) * BOB_AMP
-	return pos
