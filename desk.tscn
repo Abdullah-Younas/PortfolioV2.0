@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgsnch13o5ybb"]
+
+[ext_resource type="PackedScene" uid="uid://cppfswcembc5s" path="res://Assets/Models/DeskAndComp/Desk.glb" id="1_gmq2n"]
+
+[node name="Desk" type="Node3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Desk" parent="." instance=ExtResource("1_gmq2n")]

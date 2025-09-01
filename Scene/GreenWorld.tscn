@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://brt3r0e6gqf36"]
+[gd_scene load_steps=9 format=3 uid="uid://brt3r0e6gqf36"]
 
 [ext_resource type="Texture2D" uid="uid://bfugde68fu0u8" path="res://Assets/Textures/Green.png" id="1_1rbgi"]
 [ext_resource type="PackedScene" uid="uid://bsubbtsmarnen" path="res://Scene/player.tscn" id="2_c2k3i"]
+[ext_resource type="PackedScene" uid="uid://cgsnch13o5ybb" path="res://desk.tscn" id="3_1rbf1"]
+[ext_resource type="PackedScene" uid="uid://bk6ydou0uv375" path="res://Assets/Models/PinBoard/PinBoard.glb" id="4_arfob"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_va26u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,6 +20,8 @@ sky = SubResource("Sky_pi45i")
 ambient_light_source = 2
 ambient_light_color = Color(0.167969, 0.996094, 0.617188, 1)
 tonemap_mode = 2
+fog_enabled = true
+fog_density = 0.136
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ap48b"]
 albedo_color = Color(1, 0.783813, 0.700259, 1)
@@ -48,3 +52,9 @@ size = Vector3(0.794402, 0.01, 1.13987)
 
 [node name="Player" parent="." instance=ExtResource("2_c2k3i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96484, 0)
+
+[node name="Desk" parent="." instance=ExtResource("3_1rbf1")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.0302617, 0, -1.68471)
+
+[node name="PinBoard" parent="." instance=ExtResource("4_arfob")]
+transform = Transform3D(0.642787, 0, -0.766044, 0, 0.999999, 0, 0.766044, 0, 0.642787, 2.5, 0, -1.7)
