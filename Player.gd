@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var SENS = 0.005
+var SENS = 0.001
 # store pitch manually
 var pitch := 0.0
 var yaw := 0.0
@@ -14,11 +14,9 @@ var zoom := 80
 @onready var camera_3d = $Head/Camera3D
 @onready var fps = $FPS
 @onready var low_poly_office_chair = $low_poly_office_chair
-@onready var pc_mode = $PCMode
 
 func _ready():
 	add_to_group("Player")
-	pc_mode.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event):
@@ -43,7 +41,6 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("FocusComp"):
 		FocusMode = true
 	elif Input.is_action_just_released("FocusComp"):
-		pc_mode.visible = false
 		FocusMode = false
 
 func _physics_process(delta):
@@ -51,7 +48,7 @@ func _physics_process(delta):
 	
 	if FocusMode:
 		# Smooth zoom for focus mode
-		zoom = lerpf(zoom, 20.0, delta * Zoom_speed)
+		zoom = lerpf(zoom, 1.0, delta * Zoom_speed)
 	else:
 		# Instant zoom for manual scroll
 		zoom = target_zoom
@@ -75,4 +72,5 @@ func _physics_process(delta):
 		if abs(yaw - 0.015) < 0.001 and abs(pitch - -0.175) < 0.001:
 			yaw = 0.015
 			pitch = -0.175
-			pc_mode.visible = true
+			if zoom == 1.0:
+				get_tree().change_scene_to_file("res://PCLevel.tscn")

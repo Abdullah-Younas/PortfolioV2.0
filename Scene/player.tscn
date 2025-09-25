@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsubbtsmarnen"]
+[gd_scene load_steps=7 format=3 uid="uid://bsubbtsmarnen"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_h7eii"]
 [ext_resource type="PackedScene" uid="uid://dl7k6xflbei3p" path="res://Assets/Models/OfficeChair/low_poly_office_chair.glb" id="4_nghdd"]
-[ext_resource type="PackedScene" uid="uid://c23i1gwh8eteh" path="res://PC.tscn" id="5_3kd2q"]
 [ext_resource type="Texture2D" uid="uid://o8aad267hmvs" path="res://Assets/Extra/Assets/DarkBG.png" id="6_7f8ey"]
 [ext_resource type="FontFile" uid="uid://ck7n44exy53bg" path="res://Assets/Extra/Assets/Fonts/Gamer.ttf" id="7_mo4ye"]
 
@@ -53,5 +52,3 @@ text = "FPS 150"
 
 [node name="low_poly_office_chair" parent="." instance=ExtResource("4_nghdd")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.994951, -0.0975879)
-
-[node name="PCMode" parent="." instance=ExtResource("5_3kd2q")]

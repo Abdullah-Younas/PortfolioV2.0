@@ -1,0 +1,207 @@
+[gd_scene load_steps=2 format=3 uid="uid://daxesxt5ulqg3"]
+
+[ext_resource type="Script" path="res://PCLevel.gd" id="1_u6epf"]
+
+[node name="PC" type="Node2D"]
+script = ExtResource("1_u6epf")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.254902, 0.490196, 0.388235, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1020.0
+offset_bottom = -1.00049
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.356863)
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="ColorRect" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.25098, 0.537255, 0.658824, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = 1.0
+offset_right = 42.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 15
+text = "Desktop"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.25098, 0.537255, 0.658824, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/ColorRect2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = 1.0
+offset_right = 42.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 15
+text = "Epic Games"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.25098, 0.537255, 0.658824, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/ColorRect3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 15
+text = "Steam"
+horizontal_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.25098, 0.537255, 0.658824, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/ColorRect4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 15
+text = "Cuphead"
+horizontal_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.25098, 0.537255, 0.658824, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/ColorRect5"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 15
+text = "Cheat Engine"
+horizontal_alignment = 1
+
+[node name="ColorRect6" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.25098, 0.537255, 0.658824, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/ColorRect6"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 15
+text = "Portfolio"
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="Control/PanelContainer/MarginContainer/VBoxContainer/ColorRect6" to="." method="_on_color_rect_6_mouse_entered"]
