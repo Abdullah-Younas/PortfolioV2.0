@@ -1,0 +1,39 @@
+:root {
+  overflow: hidden;
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.85)
+    ),
+    url('./assets/MainBG.png');
+
+  background-size: cover;
+}
+
+.Monitor {
+  width: 100vw;
+  height: 98vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px; /* key for 3D */
+}
+
+.MonitorScr {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 15px solid rgb(114, 114, 114);
+  border-radius: 10px;
+  width: 95%;
+  height: 95%;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  color:rgb(89, 168, 168);
+}
+
+.bootupimg{
+  background-color: aliceblue;
+  width: 10%;
+  height: 10%;
+}
