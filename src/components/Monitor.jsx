@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './Monitor.css'
+import Taskbar from './Taskbar.jsx'
 
 function Monitor() {
   const [on, setOn] = useState(false)
@@ -12,7 +13,7 @@ function Monitor() {
 
   return (
     <div className={`MonitorScreen ${on ? 'on' : ''}`}>
-        <div className='Taskbar'></div>
+      <Taskbar/>
     </div>
   )
 }
