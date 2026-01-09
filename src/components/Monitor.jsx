@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './Monitor.css'
 import Taskbar from './Taskbar.jsx'
+import Desktop from './Desktop.jsx'
 
 function Monitor() {
   const [on, setOn] = useState(false)
