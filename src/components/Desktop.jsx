@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react'
 import './Desktop.css'
 
-function Desktop({ folder }) {
+function Desktop() {
   return (
     <>
-        {folder === 1 && 
-        <div id={`folder${folder}`} className="folder">
-            📁 This is Folder One
+        <div className="Desktop">
+            <div className='Icon' onClick={() => console.log("it's mee web projects")}>
+                📁
+            </div>
+            <div className='Icon' onClick={() => console.log("it's mee About.txt")}>
+                📄
+            </div>
+            <div className='Icon' onClick={() => console.log("it's mee game projects")}>
+                📁
+            </div>
+            <div className='Icon' onClick={() => console.log("it's mee Resume.txt")}>
+                📄
+            </div>
         </div>
-        }
-
-        {folder === 2 && 
-        <div id={`folder${folder}`} className='folder'>
-            📁 This is Folder 2
-        </div>}
-
-        {folder === 3 && 
-        <div id={`folder${folder}`} className='folder'>
-            📁 This is Folder 3
-        </div>}
     </>
   )
 }

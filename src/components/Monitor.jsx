@@ -14,10 +14,8 @@ function Monitor() {
 
   return (
     <div className={`MonitorScreen ${on ? 'on' : ''}`}>
+      <Desktop/>
       <Taskbar/>
-      <Desktop folder={3}/>
-      <Desktop folder={2}/>
-      <Desktop folder={1}/>
     </div>
   )
 }
