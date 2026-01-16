@@ -226,21 +226,36 @@ function Desktop() {
             position: 'absolute',
             left: `${icon.x}px`,
             top: `${icon.y}px`,
-            fontSize: '48px',
-            padding: '10px',
+
+            /* 🔥 ADD / CHANGE THESE */
+            width: '90px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '5px',
-            userSelect: 'none',
             textAlign: 'center',
+
+            fontSize: '48px',
+            padding: '6px 0',
+            userSelect: 'none',
             color: 'white',
-            textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
             cursor: 'pointer'
           }}
         >
           <div style={{ fontSize: '48px' }}>{icon.emoji}</div>
-          <div style={{ fontSize: '12px', maxWidth: '90px', wordWrap: 'break-word' }}>{icon.title}</div>
+          <div
+            style={{
+              fontSize: '12px',
+              maxWidth: '90px',
+              textAlign: 'center',
+              wordBreak: 'break-word',
+              lineHeight: '1.2',
+              fontFamily: 'Tahoma, sans-serif',
+              fontWeight: 'bold'
+            }}
+          >
+            {icon.title}
+          </div>
         </div>
       ))}
 
@@ -254,9 +269,10 @@ function Desktop() {
             width: `${window.width}px`,
             height: `${window.height}px`,
             background: 'white',
-            border: '1px solid #ccc',
+            border: '3px solid',
+            borderColor: '#0054e3 #0054e3 #0054e3 #0054e3',
             borderRadius: '8px 8px 0 0',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.5)',
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
@@ -266,62 +282,131 @@ function Desktop() {
           <div
             onMouseDown={(e) => handleMouseDown(e, window.id)}
             style={{
-              background: 'linear-gradient(to bottom, #e8e8e8, #d0d0d0)',
-              padding: '8px 12px',
+              background: 'linear-gradient(to bottom, #0997ff 0%, #0053ee 3%, #0050ee 6%, #004de4 8%, #0046dd 11%, #0041d5 20%, #003dd1 24%, #0035c7 56%, #0034c5 81%, #003bc7 85%, #0040cc 88%, #0045d1 91%, #004dd8 94%, #0052db 97%, #0054e0 100%)',
+              padding: '3px 8px',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              borderBottom: '1px solid #aaa',
-              userSelect: 'none'
+              borderBottom: 'none',
+              userSelect: 'none',
+              height: '28px'
             }}
           >
-            <span style={{ fontWeight: 'bold', fontSize: '14px' }}>{window.title}</span>
-            <button
-              onClick={() => closeWindow(window.id)}
-              onMouseDown={(e) => e.stopPropagation()}
-              style={{
-                background: '#ff5f56',
-                border: 'none',
-                borderRadius: '50%',
-                width: '16px',
-                height: '16px',
-                cursor: 'pointer',
-                fontSize: '10px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white'
-              }}
-            >
-              ×
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ fontSize: '14px' }}>📁</span>
+              <span style={{ fontWeight: 'bold', fontSize: '11px', color: 'white', fontFamily: 'Tahoma, sans-serif' }}>
+                {window.title}
+              </span>
+            </div>
+            <div style={{ display: 'flex', gap: '2px' }}>
+              <button
+                onMouseDown={(e) => e.stopPropagation()}
+                style={{
+                  background: 'linear-gradient(to bottom, #4288f6, #2874e6)',
+                  border: '1px solid #003c74',
+                  borderRadius: '2px',
+                  width: '21px',
+                  height: '21px',
+                  cursor: 'pointer',
+                  fontSize: '11px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontFamily: 'Tahoma, sans-serif'
+                }}
+              >
+                _
+              </button>
+              <button
+                onMouseDown={(e) => e.stopPropagation()}
+                style={{
+                  background: 'linear-gradient(to bottom, #4288f6, #2874e6)',
+                  border: '1px solid #003c74',
+                  borderRadius: '2px',
+                  width: '21px',
+                  height: '21px',
+                  cursor: 'pointer',
+                  fontSize: '11px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontFamily: 'Tahoma, sans-serif'
+                }}
+              >
+                □
+              </button>
+              <button
+                onClick={() => closeWindow(window.id)}
+                onMouseDown={(e) => e.stopPropagation()}
+                style={{
+                  background: 'linear-gradient(to bottom, #f87960, #e4452d)',
+                  border: '1px solid #a5301f',
+                  borderRadius: '2px',
+                  width: '21px',
+                  height: '21px',
+                  cursor: 'pointer',
+                  fontSize: '13px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontFamily: 'Tahoma, sans-serif'
+                }}
+              >
+                ×
+              </button>
+            </div>
           </div>
 
-          <div style={{ flex: 1, padding: '20px', overflow: 'auto' }}>
+          <div style={{ flex: 1, padding: '0', overflow: 'auto', display: 'flex', background: 'white' }}>
             {window.type === 'folder' ? (
-              <div>
-                <h3 style={{ marginTop: 0, marginBottom: '15px' }}>{window.title}</h3>
+              <div style={{ display: 'flex', width: '100%' }}>
+
+                {/* Main Content Area */}
+                <div style={{ flex: 1, padding: '15px', overflow: 'auto' }}>
+                  <h3 style={{ 
+                    marginTop: 0, 
+                    marginBottom: '15px',
+                    fontSize: '13px',
+                    fontFamily: 'Tahoma, sans-serif',
+                    color: '#333'
+                  }}>
+                    {window.title}
+                  </h3>
                 
                 <div style={{ 
-                  background: '#f5f5f5', 
-                  padding: '15px', 
-                  borderRadius: '6px',
-                  marginBottom: '20px'
+                  background: '#e8eef7', 
+                  padding: '10px', 
+                  border: '1px solid #c0c7d8',
+                  marginBottom: '15px'
                 }}>
                   <div style={{ 
                     display: 'grid', 
-                    gridTemplateColumns: 'repeat(2, 1fr)', 
-                    gap: '10px',
-                    fontSize: '13px'
+                    gridTemplateColumns: 'repeat(4, 1fr)', 
+                    gap: '8px',
+                    fontSize: '11px',
+                    fontFamily: 'Tahoma, sans-serif'
                   }}>
                     <div>
-                      <label style={{ fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>
+                      <label style={{ fontWeight: 'bold', display: 'block', marginBottom: '3px', color: '#333' }}>
                         Sort By:
                       </label>
                       <select 
                         value={filters[window.title]?.sortBy || 'newest'}
                         onChange={(e) => updateFilter(window.title, 'sortBy', e.target.value)}
-                        style={{ width: '100%', padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '3px', 
+                          border: '1px solid #7f9db9',
+                          fontSize: '11px',
+                          fontFamily: 'Tahoma, sans-serif',
+                          background: 'white'
+                        }}
                       >
                         <option value="newest">Newest First</option>
                         <option value="oldest">Oldest First</option>
@@ -329,13 +414,20 @@ function Desktop() {
                     </div>
                     
                     <div>
-                      <label style={{ fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>
+                      <label style={{ fontWeight: 'bold', display: 'block', marginBottom: '3px', color: '#333' }}>
                         Language:
                       </label>
                       <select 
                         value={filters[window.title]?.language || 'all'}
                         onChange={(e) => updateFilter(window.title, 'language', e.target.value)}
-                        style={{ width: '100%', padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '3px', 
+                          border: '1px solid #7f9db9',
+                          fontSize: '11px',
+                          fontFamily: 'Tahoma, sans-serif',
+                          background: 'white'
+                        }}
                       >
                         <option value="all">All Languages</option>
                         <option value="JavaScript">JavaScript</option>
@@ -347,13 +439,20 @@ function Desktop() {
                     </div>
                     
                     <div>
-                      <label style={{ fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>
+                      <label style={{ fontWeight: 'bold', display: 'block', marginBottom: '3px', color: '#333' }}>
                         Lines of Code:
                       </label>
                       <select 
                         value={filters[window.title]?.lines || 'all'}
                         onChange={(e) => updateFilter(window.title, 'lines', e.target.value)}
-                        style={{ width: '100%', padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '3px', 
+                          border: '1px solid #7f9db9',
+                          fontSize: '11px',
+                          fontFamily: 'Tahoma, sans-serif',
+                          background: 'white'
+                        }}
                       >
                         <option value="all">All</option>
                         <option value="high">High (2000+)</option>
@@ -362,13 +461,20 @@ function Desktop() {
                     </div>
                     
                     <div>
-                      <label style={{ fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>
+                      <label style={{ fontWeight: 'bold', display: 'block', marginBottom: '3px', color: '#333' }}>
                         Rarity:
                       </label>
                       <select 
                         value={filters[window.title]?.rarity || 'all'}
                         onChange={(e) => updateFilter(window.title, 'rarity', e.target.value)}
-                        style={{ width: '100%', padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '3px', 
+                          border: '1px solid #7f9db9',
+                          fontSize: '11px',
+                          fontFamily: 'Tahoma, sans-serif',
+                          background: 'white'
+                        }}
                       >
                         <option value="all">All</option>
                         <option value="best">Best (4-5★)</option>
@@ -378,53 +484,74 @@ function Desktop() {
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                   {getFilteredFiles(window.title).map(file => (
                     <div
                       key={file.id}
                       onDoubleClick={() => openFile(window.title, file)}
                       style={{
-                        padding: '12px',
+                        padding: '8px',
                         background: 'white',
-                        border: '1px solid #ddd',
-                        borderRadius: '4px',
+                        border: '1px solid #c0c7d8',
                         cursor: 'pointer',
-                        transition: 'all 0.2s'
+                        fontSize: '11px',
+                        fontFamily: 'Tahoma, sans-serif'
                       }}
-                      onMouseEnter={(e) => e.currentTarget.style.background = '#f0f8ff'}
-                      onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = '#3399ff'
+                        e.currentTarget.style.color = 'white'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'white'
+                        e.currentTarget.style.color = 'black'
+                      }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
-                          <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>
+                          <div style={{ fontWeight: 'bold', marginBottom: '2px' }}>
                             📄 {file.name}
                           </div>
-                          <div style={{ fontSize: '12px', color: '#666' }}>
+                          <div style={{ fontSize: '10px', opacity: 0.8 }}>
                             {file.language} • {file.lines} lines • {file.date}
                           </div>
                         </div>
-                        <div style={{ fontSize: '14px', color: '#ffa500' }}>
+                        <div style={{ fontSize: '12px', color: '#ffa500' }}>
                           {'★'.repeat(file.rarity)}{'☆'.repeat(5 - file.rarity)}
                         </div>
                       </div>
                     </div>
                   ))}
                   {getFilteredFiles(window.title).length === 0 && (
-                    <div style={{ textAlign: 'center', color: '#999', padding: '20px' }}>
+                    <div style={{ 
+                      textAlign: 'center', 
+                      color: '#666', 
+                      padding: '20px',
+                      fontSize: '11px',
+                      fontFamily: 'Tahoma, sans-serif'
+                    }}>
                       No files match the current filters
                     </div>
                   )}
                 </div>
+                </div>
               </div>
             ) : window.type === 'file' ? (
-              <div>
-                <h3 style={{ marginTop: 0 }}>{window.fileData.name}</h3>
+              <div style={{ padding: '15px' }}>
+                <h3 style={{ 
+                  marginTop: 0,
+                  fontSize: '13px',
+                  fontFamily: 'Tahoma, sans-serif',
+                  color: '#333'
+                }}>
+                  {window.fileData.name}
+                </h3>
                 <div style={{ 
-                  background: '#f5f5f5', 
-                  padding: '10px', 
-                  borderRadius: '4px',
-                  marginBottom: '15px',
-                  fontSize: '13px'
+                  background: '#e8eef7', 
+                  padding: '8px', 
+                  border: '1px solid #c0c7d8',
+                  marginBottom: '12px',
+                  fontSize: '11px',
+                  fontFamily: 'Tahoma, sans-serif'
                 }}>
                   <div><strong>Language:</strong> {window.fileData.language}</div>
                   <div><strong>Lines:</strong> {window.fileData.lines}</div>
@@ -432,26 +559,53 @@ function Desktop() {
                   <div><strong>Rating:</strong> {'★'.repeat(window.fileData.rarity)}{'☆'.repeat(5 - window.fileData.rarity)}</div>
                 </div>
                 <div style={{ 
-                  border: '2px dashed #ccc', 
-                  padding: '40px', 
+                  border: '2px dashed #7f9db9', 
+                  padding: '30px', 
                   textAlign: 'center',
-                  background: '#fafafa',
-                  borderRadius: '6px'
+                  background: '#f5f8fc'
                 }}>
-                  <div style={{ fontSize: '48px', marginBottom: '10px' }}>📄</div>
-                  <div style={{ color: '#666', marginBottom: '10px' }}>
+                  <div style={{ fontSize: '48px', marginBottom: '8px' }}>📄</div>
+                  <div style={{ 
+                    color: '#333', 
+                    marginBottom: '8px',
+                    fontSize: '11px',
+                    fontFamily: 'Tahoma, sans-serif'
+                  }}>
                     PDF Content Area
                   </div>
-                  <div style={{ fontSize: '12px', color: '#999' }}>
+                  <div style={{ 
+                    fontSize: '10px', 
+                    color: '#666',
+                    fontFamily: 'Tahoma, sans-serif'
+                  }}>
                     Use react-pdf to display PDF content here
                   </div>
                 </div>
               </div>
             ) : (
-              <div>
-                <h3 style={{ marginTop: 0 }}>{window.title}</h3>
-                <p>This is the content of {window.title}.</p>
-                <p>You can add any content here - text, images, links, etc.</p>
+              <div style={{ padding: '15px' }}>
+                <h3 style={{ 
+                  marginTop: 0,
+                  fontSize: '13px',
+                  fontFamily: 'Tahoma, sans-serif',
+                  color: '#333'
+                }}>
+                  {window.title}
+                </h3>
+                <p style={{ 
+                  fontSize: '11px',
+                  fontFamily: 'Tahoma, sans-serif',
+                  lineHeight: '1.5'
+                }}>
+                  This is the content of {window.title}.
+                </p>
+                <p style={{ 
+                  fontSize: '11px',
+                  fontFamily: 'Tahoma, sans-serif',
+                  lineHeight: '1.5'
+                }}>
+                  You can add any content here - text, images, links, etc.
+                </p>
               </div>
             )}
           </div>
