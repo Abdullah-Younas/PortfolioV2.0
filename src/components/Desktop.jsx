@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import About from './Pdf/About';
+import { PDFViewer } from '@react-pdf/renderer' // or your custom web PDF viewer import
 
 function Desktop() {
   const [windows, setWindows] = useState([])
@@ -583,30 +585,9 @@ function Desktop() {
                 </div>
               </div>
             ) : (
-              <div style={{ padding: '15px' }}>
-                <h3 style={{ 
-                  marginTop: 0,
-                  fontSize: '13px',
-                  fontFamily: 'Tahoma, sans-serif',
-                  color: '#333'
-                }}>
-                  {window.title}
-                </h3>
-                <p style={{ 
-                  fontSize: '11px',
-                  fontFamily: 'Tahoma, sans-serif',
-                  lineHeight: '1.5'
-                }}>
-                  This is the content of {window.title}.
-                </p>
-                <p style={{ 
-                  fontSize: '11px',
-                  fontFamily: 'Tahoma, sans-serif',
-                  lineHeight: '1.5'
-                }}>
-                  You can add any content here - text, images, links, etc.
-                </p>
-              </div>
+              <PDFViewer width="100%" height="100%" showToolbar={false}>
+                <About />
+              </PDFViewer>
             )}
           </div>
 
