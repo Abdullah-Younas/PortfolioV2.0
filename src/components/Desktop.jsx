@@ -21,7 +21,6 @@ function Desktop() {
         id: 2, 
         name: 'About', 
         language: 'Text', 
-        lines: 100, 
         rarity: 3, 
         date: '2024-01-01' 
       }
@@ -39,7 +38,6 @@ function Desktop() {
         id: 4, 
         name: 'Resume', 
         language: 'PDF', 
-        lines: 500, 
         rarity: 5, 
         date: '2024-01-01' 
       }
@@ -49,18 +47,18 @@ function Desktop() {
   
   const [folderContents] = useState({
     'Web Projects': [
-      { id: 5, name: 'E-Commerce Site', language: 'JavaScript', lines: 2500, rarity: 4, date: '2024-01-15' },
-      { id: 6, name: 'Portfolio Website', language: 'React', lines: 800, rarity: 2, date: '2024-03-20' },
-      { id: 7, name: 'Blog Platform', language: 'Python', lines: 3500, rarity: 5, date: '2023-11-10' },
-      { id: 8, name: 'API Dashboard', language: 'TypeScript', lines: 1200, rarity: 3, date: '2024-02-05' },
-      { id: 9, name: 'Chat Application', language: 'JavaScript', lines: 1800, rarity: 4, date: '2024-04-12' }
+      { id: 5, name: 'ACB Software and Extension', language: 'Python, Javascript', rarity: 2, date: '2025-10-01' },
+      { id: 6, name: 'Sencdec', language: 'React', rarity: 4, date: '2025-09-11' },
+      { id: 7, name: 'Whispern', language: 'React', rarity: 3, date: '2025-07-05' },
+      { id: 8, name: 'Boardify', language: 'React', rarity: 2, date: '2025-04-18' },
+      { id: 9, name: 'Smochat', language: 'React', rarity: 5, date: '2024-10-01' }
     ],
     'Game Projects': [
-      { id: 10, name: 'Platformer Game', language: 'C++', lines: 4500, rarity: 5, date: '2023-09-15' },
-      { id: 11, name: 'Puzzle Solver', language: 'Python', lines: 600, rarity: 1, date: '2024-05-01' },
-      { id: 12, name: 'RPG Battle System', language: 'C++', lines: 3200, rarity: 4, date: '2024-01-30' },
-      { id: 13, name: 'Card Game', language: 'JavaScript', lines: 1500, rarity: 3, date: '2023-12-20' },
-      { id: 14, name: 'Physics Simulator', language: 'C++', lines: 2800, rarity: 5, date: '2024-03-15' }
+      { id: 10, name: 'BloomWars', language: 'Godot', rarity: 5, date: '2025-08-16' },
+      { id: 11, name: 'Haze', language: 'Unreal Engine C++', rarity: 1, date: '2025-03-24' },
+      { id: 12, name: 'PongFusion', language: 'Java', rarity: 4, date: '2025-02-10' },
+      { id: 13, name: 'Turfist Prototype', language: 'Unreal Engine C++', rarity: 3, date: '2025-12-25' },
+      { id: 14, name: 'GENG', language: 'OpenGL C++', rarity: 5, date: 'In Development' }
     ]
   })
   
@@ -320,7 +318,7 @@ function Desktop() {
             top: window.isMaximized ? '0' : `${window.y}px`,
             width: window.isMaximized ? '100%' : `${window.width}px`,
             height: window.isMaximized ? '100%' : `${window.height}px`,
-            background: 'white',
+            background: '#0000009c',
             border: '3px solid',
             borderColor: '#0054e3 #0054e3 #0054e3 #0054e3',
             borderRadius: '8px 8px 0 0',
@@ -346,7 +344,7 @@ function Desktop() {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span style={{ fontSize: '14px' }}>📁</span>
-              <span style={{ fontWeight: 'bold', fontSize: '11px', color: 'white', fontFamily: 'Tahoma, sans-serif' }}>
+              <span style={{ fontWeight: 'bold', fontSize: '12px', color: 'white', fontFamily: 'Tahoma, sans-serif' }}>
                 {window.title}
               </span>
             </div>
@@ -396,12 +394,23 @@ function Desktop() {
             </div>
           </div>
 
-          <div style={{ flex: 1, padding: '0', overflow: 'auto', display: 'flex', background: 'white' }}>
+          <div style={{ flex: 1, padding: '0', overflow: 'hidden', display: 'flex'}}>
             {window.type === 'folder' ? (
-              <div style={{ display: 'flex', width: '100%', flexDirection: 'column', padding: '15px' }}>
-                <h3 style={{ marginTop: 0, fontSize: '14px', fontFamily: 'Tahoma, sans-serif' }}>
-                  {window.title}
-                </h3>
+              <div style={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
+                {/* Table Header */}
+                <div style={{ 
+                  display: 'flex', 
+                  borderBottom: '1px solid #d4d4d4',
+                  padding: '4px 8px',
+                  fontFamily: 'Tahoma, sans-serif',
+                  fontSize: '11px',
+                  fontWeight: 'bold',
+                  color: '#aaaaaa'
+                }}>
+                  <div style={{ flex: 2 }}>Name</div>
+                  <div style={{ flex: 1 }}>Type</div>
+                  <div style={{ flex: 1 }}>Date modified</div>
+                </div>
                 
                 {/* File List */}
                 <div style={{ flex: 1, overflow: 'auto' }}>
@@ -410,42 +419,28 @@ function Desktop() {
                       key={file.id}
                       onDoubleClick={() => openFile(window.title, file)}
                       style={{
-                        padding: '8px',
-                        marginBottom: '4px',
-                        background: '#f0f0f0',
-                        border: '1px solid #ccc',
+                        display: 'flex',
+                        padding: '8px 8px',
                         cursor: 'pointer',
                         fontFamily: 'Tahoma, sans-serif',
-                        fontSize: '11px'
+                        fontSize: '11px',
+                        borderBottom: '1px solid #f0f0f041'
                       }}
+                      onMouseEnter={(e) => e.currentTarget.style.background = '#00000083'}
+                      onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                     >
-                      <div style={{ fontWeight: 'bold' }}>📄 {file.name}</div>
-                      <div style={{ fontSize: '10px', color: '#666' }}>
-                        {file.language} • {file.lines} lines • {file.date}
+                      <div style={{ flex: 2, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <span>📄</span>
+                        <span>{file.name}</span>
                       </div>
+                      <div style={{ flex: 1, color: '#aaaaaa' }}>{file.language}</div>
+                      <div style={{ flex: 1, color: '#aaaaaa' }}>{file.date}</div>
                     </div>
                   ))}
                 </div>
               </div>
             ) : window.type === 'file' ? (
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                {!window.hideStats && (
-                  <>
-                    <div style={{ padding: '15px 15px 0 15px' }}>
-                      <h3 style={{ marginTop: 0, fontSize: '13px', fontFamily: 'Tahoma, sans-serif', color: '#333' }}>
-                        {window.fileData?.name || 'File'}
-                      </h3>
-
-                      <div style={{ background: '#e8eef7', padding: '8px', border: '1px solid #c0c7d8', marginBottom: '12px' }}>
-                        <div><strong>Language:</strong> {window.fileData?.language}</div>
-                        <div><strong>Lines:</strong> {window.fileData?.lines}</div>
-                        <div><strong>Date:</strong> {window.fileData?.date}</div>
-                        <div><strong>Rating:</strong> {'★'.repeat(window.fileData?.rarity || 0)}{'☆'.repeat(5 - (window.fileData?.rarity || 0))}</div>
-                      </div>
-                    </div>
-                  </>
-                )}
-
                 <div style={{ flex: 1 }}>
                   <PDFViewer width="100%" height="100%">
                     <About />
