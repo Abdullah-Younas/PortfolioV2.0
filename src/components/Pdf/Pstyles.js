@@ -18,11 +18,12 @@ export const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 18,
-    margin: 12,
+    marginTop: 16,
+    marginBottom: 8,
     fontFamily: 'Oswald',
   },
   text: {
-    margin: 12,
+    marginBottom: 12,
     fontSize: 14,
     textAlign: 'justify',
     fontFamily: 'Times-Roman',

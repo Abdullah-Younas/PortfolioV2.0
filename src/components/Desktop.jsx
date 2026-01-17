@@ -1,5 +1,16 @@
 import { useState } from 'react'
 import About from './Pdf/About';
+import ACB from './Pdf/ACB';
+import BloomWars from './Pdf/BloomWars';
+import Boardify from './Pdf/Boardify';
+import Cv from './Pdf/CV';
+import GENG from './Pdf/GENG';
+import Haze from './Pdf/Haze';
+import PongFusion from './Pdf/PongFusion';
+import Sencdec from './Pdf/Sencdec';
+import Smochat from './Pdf/Smochat';
+import Turfist from './Pdf/Turfist';
+import Whispern from './Pdf/Whispern';
 import { PDFViewer } from '@react-pdf/renderer'
 
 function Desktop() {
@@ -12,7 +23,7 @@ function Desktop() {
     { 
       id: 2, 
       type: 'file', 
-      title: 'About.txt', 
+      title: 'About', 
       emoji: '📄', 
       x: 0, 
       y: 100,
@@ -29,7 +40,7 @@ function Desktop() {
     { 
       id: 4, 
       type: 'file', 
-      title: 'Resume.pdf', 
+      title: 'CV', 
       emoji: '📄', 
       x: 0, 
       y: 300,
@@ -229,15 +240,15 @@ function Desktop() {
     if (filter.sortBy === 'newest') {
       filtered.sort((a, b) => new Date(b.date) - new Date(a.date))
     } else if (filter.sortBy === 'oldest') {
-      filtered.sort((a, b) => new Date(a.date) - new Date(b.date))
+      filtered.sort((a, b) => new Date(a.date) - new Date(a.date))
     }
     
     return filtered
   }
   
   const openFile = (folder, file) => {
-    const fileTitle = `${file.name}.pdf`
-    if (windows.some(w => w.title === fileTitle)) {
+    const fileTitle = file.name
+    if (windows.some(w => w.fileId === file.id)) {
       return
     }
     
@@ -424,7 +435,8 @@ function Desktop() {
                         cursor: 'pointer',
                         fontFamily: 'Tahoma, sans-serif',
                         fontSize: '11px',
-                        borderBottom: '1px solid #f0f0f041'
+                        borderBottom: '1px solid #f0f0f041',
+                        color: 'white'
                       }}
                       onMouseEnter={(e) => e.currentTarget.style.background = '#00000083'}
                       onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
@@ -442,8 +454,19 @@ function Desktop() {
             ) : window.type === 'file' ? (
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div style={{ flex: 1 }}>
-                  <PDFViewer width="100%" height="100%">
-                    <About />
+                  <PDFViewer width="100%" height="100%" showToolbar={false}>
+                    {window.fileId === 2 && <About />}
+                    {window.fileId === 4 && <Cv />}
+                    {window.fileId === 5 && <ACB />}
+                    {window.fileId === 6 && <Sencdec />}
+                    {window.fileId === 7 && <Whispern />}
+                    {window.fileId === 8 && <Boardify />}
+                    {window.fileId === 9 && <Smochat />}
+                    {window.fileId === 10 && <BloomWars />}
+                    {window.fileId === 11 && <Haze />}
+                    {window.fileId === 12 && <PongFusion />}
+                    {window.fileId === 13 && <Turfist />}
+                    {window.fileId === 14 && <GENG />}
                   </PDFViewer>
                 </div>
               </div>
