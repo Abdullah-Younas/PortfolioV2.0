@@ -12,6 +12,7 @@ import Smochat from './Pdf/Smochat';
 import Turfist from './Pdf/Turfist';
 import Whispern from './Pdf/Whispern';
 import Pong from './games/Pong';
+import Snake from './games/Snake';
 import { PDFViewer } from '@react-pdf/renderer'
 
 function Desktop() {
@@ -58,9 +59,17 @@ function Desktop() {
       id: 'pong-game', 
       type: 'game', 
       title: 'Pong', 
-      emoji: '🎮', 
+      emoji: '🏓', 
       x: 0, 
       y: 400 
+    },
+    { 
+      id: 'snake-game', 
+      type: 'game', 
+      title: 'Snake', 
+      emoji: '🐍', 
+      x: 0, 
+      y: 500 
     }
 
   ])
@@ -515,7 +524,7 @@ function Desktop() {
                 </div>
               </div>
             ) : window.type === 'game' ? (
-              <Pong />
+              window.title === 'Pong' ? <Pong /> : window.title === 'Snake' ? <Snake /> : null
             ) : null}
           </div>
           {window.type !== 'game' && (
