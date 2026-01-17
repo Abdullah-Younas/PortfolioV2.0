@@ -66,9 +66,9 @@ function Desktop() {
     ],
     'Game Projects': [
       { id: 10, name: 'BloomWars', language: 'Godot', rarity: 5, date: '2025-08-16' },
-      { id: 11, name: 'Haze', language: 'Unreal Engine C++', rarity: 1, date: '2025-03-24' },
+      { id: 11, name: 'Haze', language: 'Unreal Engine', rarity: 1, date: '2025-03-24' },
       { id: 12, name: 'PongFusion', language: 'Java', rarity: 4, date: '2025-02-10' },
-      { id: 13, name: 'Turfist Prototype', language: 'Unreal Engine C++', rarity: 3, date: '2025-12-25' },
+      { id: 13, name: 'Turfist Prototype', language: 'Unreal Engine', rarity: 3, date: '2025-12-25' },
       { id: 14, name: 'GENG', language: 'OpenGL C++', rarity: 5, date: 'In Development' }
     ]
   })

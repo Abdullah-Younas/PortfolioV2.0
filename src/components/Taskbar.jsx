@@ -59,10 +59,6 @@ function Taskbar() {
     setStartMenuOpen(!startMenuOpen);
   }
 
-  const openPdfInNewTab = () => {
-    window.open(resume, '_blank', 'noopener,noreferrer');
-  };
-
   return (
     <>
       <div className='Taskbar'>
@@ -74,7 +70,6 @@ function Taskbar() {
 
         <div className='Right'>
           <div className='systraybtns'>
-            <button id='Resume' className='Systraybtn' onClick={openPdfInNewTab}>R</button>
             <button id='Availability' className='Systraybtn' onMouseEnter={SetModAToggle} onMouseLeave={SetModAToggle}>A</button>
             <button id='Contact' className='Systraybtn' onMouseEnter={SetModCToggle} onMouseLeave={SetModCToggle}>C</button>
           </div>
