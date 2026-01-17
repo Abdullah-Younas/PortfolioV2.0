@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo, memo } from 'react'
 import About from './Pdf/About';
 import ACB from './Pdf/ACB';
 import BloomWars from './Pdf/BloomWars';
@@ -14,6 +14,33 @@ import Whispern from './Pdf/Whispern';
 import Pong from './games/Pong';
 import Snake from './games/Snake';
 import { PDFViewer } from '@react-pdf/renderer'
+
+// Memoized PDF Component to prevent re-renders
+const MemoizedPDFViewer = memo(({ fileId }) => {
+  const pdfContent = useMemo(() => {
+    switch(fileId) {
+      case 2: return <About />
+      case 4: return <Cv />
+      case 5: return <ACB />
+      case 6: return <Sencdec />
+      case 7: return <Whispern />
+      case 8: return <Boardify />
+      case 9: return <Smochat />
+      case 10: return <BloomWars />
+      case 11: return <Haze />
+      case 12: return <PongFusion />
+      case 13: return <Turfist />
+      case 14: return <GENG />
+      default: return null
+    }
+  }, [fileId])
+
+  return (
+    <PDFViewer width="100%" height="100%" showToolbar={false}>
+      {pdfContent}
+    </PDFViewer>
+  )
+})
 
 function Desktop() {
   const [windows, setWindows] = useState([])
@@ -96,7 +123,6 @@ function Desktop() {
   const [activeFolder, setActiveFolder] = useState(null)
 
   const openWindow = (type, title, iconData = null) => {
-    // For files, check by fileId instead of title to avoid duplicates
     if (type === 'file' && iconData?.fileData) {
       if (windows.some(w => w.fileId === iconData.fileData.id)) {
         return
@@ -188,6 +214,7 @@ function Desktop() {
           : w
       ))
     } else if (resizing) {
+      e.preventDefault()
       const deltaX = e.clientX - offset.x
       const deltaY = e.clientY - offset.y
       
@@ -201,13 +228,11 @@ function Desktop() {
           let newWidth = Math.max(minWidth, Math.min(maxWidth, offset.startWidth + deltaX))
           let newHeight = Math.max(minHeight, Math.min(maxHeight, offset.startHeight + deltaY))
           
-          // For game windows, maintain 4:3 aspect ratio
           if (w.type === 'game') {
             const aspectRatio = 4 / 3
             const widthBasedHeight = newWidth / aspectRatio
             const heightBasedWidth = newHeight * aspectRatio
             
-            // Use the dimension that fits best while maintaining aspect ratio
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
               newHeight = Math.max(minHeight, Math.min(maxHeight, widthBasedHeight))
               newWidth = newHeight * aspectRatio
@@ -324,12 +349,17 @@ function Desktop() {
     <div 
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
       style={{ 
         position: 'relative',
         width: '100%',
         height: '100%',
         overflow: 'hidden',
         background: 'rgba(0, 0, 0, 0.40)',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none'
       }}
     >
       {icons.map((icon) => (
@@ -354,7 +384,7 @@ function Desktop() {
             cursor: 'pointer'
           }}
         >
-          <div style={{ fontSize: '48px' }}>{icon.emoji}</div>
+          <div style={{ fontSize: '48px', pointerEvents: 'none' }}>{icon.emoji}</div>
           <div
             style={{
               fontSize: '12px',
@@ -363,7 +393,8 @@ function Desktop() {
               wordBreak: 'break-word',
               lineHeight: '1.2',
               fontFamily: 'Tahoma, sans-serif',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              pointerEvents: 'none'
             }}
           >
             {icon.title}
@@ -388,7 +419,8 @@ function Desktop() {
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
-            zIndex: 1000
+            zIndex: 1000,
+            pointerEvents: 'auto'
           }}
         >
           <div
@@ -401,10 +433,11 @@ function Desktop() {
               alignItems: 'center',
               borderBottom: 'none',
               userSelect: 'none',
-              height: '28px'
+              height: '28px',
+              cursor: 'move'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', pointerEvents: 'none' }}>
               <span style={{ fontSize: '14px' }}>📁</span>
               <span style={{ fontWeight: 'bold', fontSize: '12px', color: 'white', fontFamily: 'Tahoma, sans-serif' }}>
                 {window.title}
@@ -458,10 +491,15 @@ function Desktop() {
             </div>
           </div>
 
-          <div style={{ flex: 1, padding: '0', overflow: 'hidden', display: 'flex'}}>
+          <div style={{ 
+            flex: 1, 
+            padding: '0', 
+            overflow: 'hidden', 
+            display: 'flex',
+            pointerEvents: (dragging === window.id || resizing === window.id) ? 'none' : 'auto'
+          }}>
             {window.type === 'folder' ? (
               <div style={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
-                {/* Table Header */}
                 <div style={{ 
                   display: 'flex', 
                   borderBottom: '1px solid #d4d4d4',
@@ -476,7 +514,6 @@ function Desktop() {
                   <div style={{ flex: 1 }}>Date Developed</div>
                 </div>
                 
-                {/* File List */}
                 <div style={{ flex: 1, overflow: 'auto' }}>
                   {getFilteredFiles(window.title).map(file => (
                     <div
@@ -507,20 +544,7 @@ function Desktop() {
             ) : window.type === 'file' ? (
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div style={{ flex: 1 }}>
-                  <PDFViewer width="100%" height="100%" showToolbar={false}>
-                    {window.fileId === 2 && <About />}
-                    {window.fileId === 4 && <Cv />}
-                    {window.fileId === 5 && <ACB />}
-                    {window.fileId === 6 && <Sencdec />}
-                    {window.fileId === 7 && <Whispern />}
-                    {window.fileId === 8 && <Boardify />}
-                    {window.fileId === 9 && <Smochat />}
-                    {window.fileId === 10 && <BloomWars />}
-                    {window.fileId === 11 && <Haze />}
-                    {window.fileId === 12 && <PongFusion />}
-                    {window.fileId === 13 && <Turfist />}
-                    {window.fileId === 14 && <GENG />}
-                  </PDFViewer>
+                  <MemoizedPDFViewer fileId={window.fileId} />
                 </div>
               </div>
             ) : window.type === 'game' ? (

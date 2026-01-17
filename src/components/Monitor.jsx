@@ -5,17 +5,42 @@ import Desktop from './Desktop.jsx'
 
 function Monitor() {
   const [on, setOn] = useState(false)
+  const [showDesktop, setShowDesktop] = useState(false)
 
   useEffect(() => {
-    // small delay = feels like power-on
-    const t = setTimeout(() => setOn(true), 200)
-    return () => clearTimeout(t)
+    // Monitor power-on animation
+    const powerOnTimer = setTimeout(() => setOn(true), 200)
+    
+    // Show desktop after 3 seconds from power-on
+    const desktopTimer = setTimeout(() => setShowDesktop(true), 3600)
+    
+    return () => {
+      clearTimeout(powerOnTimer)
+      clearTimeout(desktopTimer)
+    }
   }, [])
 
   return (
     <div className={`MonitorScreen ${on ? 'on' : ''}`}>
-      <Desktop/>
-      <Taskbar/>
+      {!showDesktop ? (
+        <div style={{
+          width: '100%',
+          height: '100%',
+          background: '#00000093',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#fff',
+          fontSize: '2rem',
+          fontFamily: 'Tahoma, sans-serif'
+        }}>
+        </div>
+      ) : (
+        <>
+          <Desktop/>
+          <Taskbar/>
+        </>
+      )}
     </div>
   )
 }
