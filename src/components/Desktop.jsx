@@ -11,6 +11,7 @@ import Sencdec from './Pdf/Sencdec';
 import Smochat from './Pdf/Smochat';
 import Turfist from './Pdf/Turfist';
 import Whispern from './Pdf/Whispern';
+import Pong from './games/Pong';
 import { PDFViewer } from '@react-pdf/renderer'
 
 function Desktop() {
@@ -52,7 +53,16 @@ function Desktop() {
         rarity: 5, 
         date: '2024-01-01' 
       }
+    },
+    { 
+      id: 'pong-game', 
+      type: 'game', 
+      title: 'Pong', 
+      emoji: '🎮', 
+      x: 0, 
+      y: 400 
     }
+
   ])
   const [draggingIcon, setDraggingIcon] = useState(null)
   
@@ -92,9 +102,13 @@ function Desktop() {
       title,
       x: 100 + windows.length * 30,
       y: 100 + windows.length * 30,
-      width: type === 'folder' ? 800 : 700,
-      height: type === 'folder' ? 650 : 600,
-      isMaximized: false
+      width: type === 'folder' ? 800 : type === 'game' ? 844 : 700,
+      height: type === 'folder' ? 650 : type === 'game' ? 663 : 600,
+      isMaximized: false,
+      minWidth: type === 'game' ? 440 : 200,
+      minHeight: type === 'game' ? 380 : 150,
+      maxWidth: type === 'game' ? 844 : null,
+      maxHeight: type === 'game' ? 663 : null
     }
     
     if (type === 'file' && iconData?.fileData) {
@@ -170,8 +184,32 @@ function Desktop() {
       
       setWindows(windows.map(w => {
         if (w.id === resizing) {
-          const newWidth = Math.max(200, offset.startWidth + deltaX)
-          const newHeight = Math.max(150, offset.startHeight + deltaY)
+          const minWidth = w.minWidth || 200
+          const minHeight = w.minHeight || 150
+          const maxWidth = w.maxWidth || Infinity
+          const maxHeight = w.maxHeight || Infinity
+          
+          let newWidth = Math.max(minWidth, Math.min(maxWidth, offset.startWidth + deltaX))
+          let newHeight = Math.max(minHeight, Math.min(maxHeight, offset.startHeight + deltaY))
+          
+          // For game windows, maintain 4:3 aspect ratio
+          if (w.type === 'game') {
+            const aspectRatio = 4 / 3
+            const widthBasedHeight = newWidth / aspectRatio
+            const heightBasedWidth = newHeight * aspectRatio
+            
+            // Use the dimension that fits best while maintaining aspect ratio
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+              newHeight = Math.max(minHeight, Math.min(maxHeight, widthBasedHeight))
+              newWidth = newHeight * aspectRatio
+            } else {
+              newWidth = Math.max(minWidth, Math.min(maxWidth, heightBasedWidth))
+              newHeight = newWidth / aspectRatio
+            }
+            
+            return { ...w, width: newWidth, height: newHeight }
+          }
+          
           return { ...w, width: newWidth, height: newHeight }
         }
         return w
@@ -364,27 +402,29 @@ function Desktop() {
               </span>
             </div>
             <div style={{ display: 'flex', gap: '2px' }}>
-              <button
-                onClick={() => toggleMaximize(window.id)}
-                onMouseDown={(e) => e.stopPropagation()}
-                style={{
-                  background: 'linear-gradient(to bottom, #4288f6, #2874e6)',
-                  border: '1px solid #003c74',
-                  borderRadius: '2px',
-                  width: '21px',
-                  height: '21px',
-                  cursor: 'pointer',
-                  fontSize: '11px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  fontFamily: 'Tahoma, sans-serif'
-                }}
-              >
-                □
-              </button>
+              {window.type !== 'game' && (
+                <button
+                  onClick={() => toggleMaximize(window.id)}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  style={{
+                    background: 'linear-gradient(to bottom, #4288f6, #2874e6)',
+                    border: '1px solid #003c74',
+                    borderRadius: '2px',
+                    width: '21px',
+                    height: '21px',
+                    cursor: 'pointer',
+                    fontSize: '11px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    fontFamily: 'Tahoma, sans-serif'
+                  }}
+                >
+                  □
+                </button>
+              )}
               <button
                 onClick={() => closeWindow(window.id)}
                 onMouseDown={(e) => e.stopPropagation()}
@@ -474,21 +514,25 @@ function Desktop() {
                   </PDFViewer>
                 </div>
               </div>
+            ) : window.type === 'game' ? (
+              <Pong />
             ) : null}
           </div>
-          <div
-            onMouseDown={(e) => handleResizeStart(e, window.id)}
-            style={{
-              position: 'absolute',
-              right: 0,
-              bottom: 0,
-              width: '20px',
-              height: '20px',
-              cursor: 'nwse-resize',
-              background: 'linear-gradient(135deg, transparent 50%, #999 50%)',
-              borderRadius: '0 0 8px 0'
-            }}
-          />
+          {window.type !== 'game' && (
+            <div
+              onMouseDown={(e) => handleResizeStart(e, window.id)}
+              style={{
+                position: 'absolute',
+                right: 0,
+                bottom: 0,
+                width: '20px',
+                height: '20px',
+                cursor: 'nwse-resize',
+                background: 'linear-gradient(135deg, transparent 50%, #999 50%)',
+                borderRadius: '0 0 8px 0'
+              }}
+            />
+          )}
         </div>
       ))}
     </div>
