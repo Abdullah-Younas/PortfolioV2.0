@@ -14,7 +14,19 @@ export const styles = StyleSheet.create({
   author: {
     fontSize: 12,
     textAlign: 'center',
-    marginBottom: 40,
+    marginBottom: 20,
+  },
+  linkContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 30,
+    flexWrap: 'wrap',
+  },
+  link: {
+    fontSize: 12,
+    color: '#0066cc',
+    textDecoration: 'underline',
   },
   subtitle: {
     fontSize: 18,
@@ -23,10 +35,46 @@ export const styles = StyleSheet.create({
     fontFamily: 'Oswald',
   },
   text: {
-    marginBottom: 12,
+    marginBottom: 10,
     fontSize: 14,
     textAlign: 'justify',
     fontFamily: 'Times-Roman',
+  },
+  jobTitle: {
+    marginBottom: 6,
+    fontSize: 14,
+    fontFamily: 'Times-Roman',
+    fontWeight: 'bold',
+  },
+  bullet: {
+    marginBottom: 4,
+    marginLeft: 10,
+    fontSize: 13,
+    fontFamily: 'Times-Roman',
+  },
+  projectItem: {
+    marginBottom: 12,
+  },
+  projectTitle: {
+    fontSize: 14,
+    fontFamily: 'Times-Roman',
+    fontWeight: 'bold',
+    marginBottom: 3,
+  },
+  projectDesc: {
+    fontSize: 13,
+    fontFamily: 'Times-Roman',
+    marginBottom: 3,
+    marginLeft: 10,
+  },
+  projectLink: {
+    fontSize: 12,
+    color: '#0066cc',
+    textDecoration: 'underline',
+    marginLeft: 10,
+  },
+  bold: {
+    fontWeight: 'bold',
   },
   image: {
     marginVertical: 15,

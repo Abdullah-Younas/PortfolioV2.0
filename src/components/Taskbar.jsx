@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import './Taskbar.css'
-import resume from '../assets/Malik Muhammad Abdullah Younas Resume.pdf';
 
 function Taskbar() {
   const [time, setTime] = useState('');
