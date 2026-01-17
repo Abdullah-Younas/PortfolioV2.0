@@ -3,7 +3,7 @@ import About from './Pdf/About';
 import ACB from './Pdf/ACB';
 import BloomWars from './Pdf/BloomWars';
 import Boardify from './Pdf/Boardify';
-import Cv from './Pdf/CV';
+import Cv from './Pdf/Cv';
 import GENG from './Pdf/GENG';
 import Haze from './Pdf/Haze';
 import PongFusion from './Pdf/PongFusion';
