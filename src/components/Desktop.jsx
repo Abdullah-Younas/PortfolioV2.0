@@ -77,7 +77,12 @@ function Desktop() {
   const [activeFolder, setActiveFolder] = useState(null)
 
   const openWindow = (type, title, iconData = null) => {
-    if (windows.some(w => w.title === title)) {
+    // For files, check by fileId instead of title to avoid duplicates
+    if (type === 'file' && iconData?.fileData) {
+      if (windows.some(w => w.fileId === iconData.fileData.id)) {
+        return
+      }
+    } else if (windows.some(w => w.title === title)) {
       return
     }
     
@@ -87,12 +92,11 @@ function Desktop() {
       title,
       x: 100 + windows.length * 30,
       y: 100 + windows.length * 30,
-      width: type === 'folder' ? 600 : 400,
-      height: type === 'folder' ? 450 : 300,
+      width: type === 'folder' ? 800 : 700,
+      height: type === 'folder' ? 650 : 600,
       isMaximized: false
     }
     
-    // If it's a file from desktop, add the file data
     if (type === 'file' && iconData?.fileData) {
       newWindow.fileData = iconData.fileData
       newWindow.fileId = iconData.fileData.id
@@ -263,8 +267,8 @@ function Desktop() {
       isMaximized: false,
       x: 100 + windows.length * 30,
       y: 100 + windows.length * 30,
-      width: 500,
-      height: 400
+      width: 700,
+      height: 600
     }
     setWindows([...windows, newWindow])
   }
@@ -278,7 +282,7 @@ function Desktop() {
         width: '100%',
         height: '100%',
         overflow: 'hidden',
-        background: 'rgba(0, 0, 0, 0.20)',
+        background: 'rgba(0, 0, 0, 0.40)',
       }}
     >
       {icons.map((icon) => (
@@ -420,7 +424,7 @@ function Desktop() {
                 }}>
                   <div style={{ flex: 2 }}>Name</div>
                   <div style={{ flex: 1 }}>Type</div>
-                  <div style={{ flex: 1 }}>Date modified</div>
+                  <div style={{ flex: 1 }}>Date Developed</div>
                 </div>
                 
                 {/* File List */}

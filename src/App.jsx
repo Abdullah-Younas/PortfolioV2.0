@@ -16,8 +16,8 @@ function App() {
     const centerX = rect.width / 2
     const centerY = rect.height / 2
 
-    const rotateX = ((y - centerY) / centerY) * -1
-    const rotateY = ((x - centerX) / centerX) * -1
+    const rotateX = ((y - centerY) / centerY) * 2
+    const rotateY = ((x - centerX) / centerX) * 2
 
     screen.style.transform = `
       rotateX(${rotateX}deg)

@@ -70,12 +70,12 @@ function Taskbar() {
 
         <div className='Right'>
           <div className='systraybtns'>
-            <button id='Availability' className='Systraybtn' onMouseEnter={SetModAToggle} onMouseLeave={SetModAToggle}>A</button>
+            <button id='Availability' className='Systraybtn' onMouseEnter={SetModAToggle} onMouseLeave={SetModAToggle}>🟢</button>
             <button id='Contact' className='Systraybtn' onMouseEnter={SetModCToggle} onMouseLeave={SetModCToggle}>C</button>
           </div>
           <span className='Clock'>{time}</span>
           <span className='HoverModalC' style={{display: ModalHoverC ? "block" : "none"}}>My contact is abdullahyounas0805@gmail.com</span>
-          <span className='HoverModalA' style={{display: ModalHoverA ? "block" : "none"}}>🔴 - not available</span>
+          <span className='HoverModalA' style={{display: ModalHoverA ? "block" : "none"}}>Available</span>
         </div>
       </div>
 
