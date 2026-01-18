@@ -16,7 +16,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 1000px; /* key for 3D */
+  perspective: 1000px;
+  overflow: hidden; /* ADD THIS */
 }
 
 .MonitorScr {
@@ -25,11 +26,14 @@
   border-radius: 10px;
   width: 95%;
   height: 95%;
+  max-width: 95vw;  /* ADD THIS */
+  max-height: 95vh; /* ADD THIS */
   transition: transform 0.15s ease-out;
   transform-style: preserve-3d;
   display: flex;
   justify-content: center;
-  color:rgb(89, 168, 168);
+  color: rgb(89, 168, 168);
+  overflow: hidden; /* ADD THIS */
 }
 
 .bootupimg{

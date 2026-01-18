@@ -8,10 +8,7 @@ function Monitor() {
   const [showDesktop, setShowDesktop] = useState(false)
 
   useEffect(() => {
-    // Monitor power-on animation
     const powerOnTimer = setTimeout(() => setOn(true), 200)
-    
-    // Show desktop after 3 seconds from power-on
     const desktopTimer = setTimeout(() => setShowDesktop(true), 3600)
     
     return () => {
