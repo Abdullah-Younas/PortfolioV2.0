@@ -9,7 +9,6 @@ import Haze from './Pdf/Haze';
 import PongFusion from './Pdf/PongFusion';
 import Sencdec from './Pdf/Sencdec';
 import Smochat from './Pdf/Smochat';
-import Turfist from './Pdf/Turfist';
 import Whispern from './Pdf/Whispern';
 import Pong from './games/Pong';
 import Snake from './games/Snake';
@@ -29,7 +28,6 @@ const MemoizedPDFViewer = memo(({ fileId }) => {
       case 10: return <BloomWars />
       case 11: return <Haze />
       case 12: return <PongFusion />
-      case 13: return <Turfist />
       case 14: return <GENG />
       default: return null
     }
@@ -70,7 +68,6 @@ function Desktop() {
       { id: 10, name: 'BloomWars', language: 'Godot', rarity: 5, date: '2025-08-16' },
       { id: 11, name: 'Haze', language: 'Unreal Engine', rarity: 1, date: '2025-03-24' },
       { id: 12, name: 'PongFusion', language: 'Java', rarity: 4, date: '2025-02-10' },
-      { id: 13, name: 'Turfist Prototype', language: 'Unreal Engine', rarity: 3, date: '2025-12-25' },
       { id: 14, name: 'GENG', language: 'OpenGL C++', rarity: 5, date: 'In Development' }
     ]
   })

@@ -8,6 +8,7 @@
     url('./assets/MainBG.png');
 
   background-size: cover;
+  font-family: 'Oswald' !important;
 }
 
 .Monitor {
