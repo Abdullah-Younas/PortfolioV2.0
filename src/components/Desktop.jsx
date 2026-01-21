@@ -40,6 +40,37 @@ const MemoizedPDFViewer = memo(({ fileId }) => {
   )
 })
 
+const getSpawnPosition = (baseWidth, baseHeight, index = 0) => {
+  const padding = 24
+  const taskbarHeight = 48 
+
+  const safeWidth = Math.min(baseWidth, window.innerWidth - padding * 2)
+  const safeHeight = Math.min(
+    baseHeight,
+    window.innerHeight - taskbarHeight - padding * 2
+  )
+
+  // Lower-middle positioning
+  const x =
+    window.innerWidth / 2 -
+    safeWidth / 2 +
+    index * 16
+
+  const y =
+    window.innerHeight -
+    safeHeight -
+    taskbarHeight -
+    padding -
+    index * 16
+
+  return {
+    x: Math.max(padding, x),
+    y: Math.max(padding, y),
+    width: safeWidth,
+    height: safeHeight
+  }
+}
+
 // Desktop Component
 function Desktop() {
   const [windows, setWindows] = useState([])
@@ -86,21 +117,23 @@ function Desktop() {
     const baseWidth = type === 'folder' ? 800 : type === 'game' ? 844 : 700
     const baseHeight = type === 'folder' ? 650 : type === 'game' ? 663 : 600
     
+    const spawn = getSpawnPosition(baseWidth, baseHeight, windows.length)
+
     const newWindow = {
       id: Date.now(),
       type,
       title,
-      x: Math.min(50 + windows.length * 20, window.innerWidth - baseWidth - 50),
-      y: Math.min(50 + windows.length * 20, window.innerHeight - baseHeight - 100),
-      width: Math.min(baseWidth, window.innerWidth - 100),
-      height: Math.min(baseHeight, window.innerHeight - 150),
+      x: spawn.x,
+      y: spawn.y,
+      width: spawn.width,
+      height: spawn.height,
       isMaximized: false,
       minWidth: type === 'game' ? 440 : 200,
       minHeight: type === 'game' ? 380 : 150,
       maxWidth: type === 'game' ? 844 : null,
       maxHeight: type === 'game' ? 663 : null
     }
-    
+
     if (type === 'file' && iconData?.fileData) {
       newWindow.fileData = iconData.fileData
       newWindow.fileId = iconData.fileData.id
@@ -280,6 +313,8 @@ function Desktop() {
     const baseWidth = 700
     const baseHeight = 600
     
+    const spawn = getSpawnPosition(baseWidth, baseHeight, windows.length)
+
     const newWindow = {
       id: Date.now(),
       type: 'file',
@@ -289,11 +324,12 @@ function Desktop() {
       fileId: file.id,
       hideStats: false,
       isMaximized: false,
-      x: Math.min(50 + windows.length * 20, window.innerWidth - baseWidth - 50),
-      y: Math.min(50 + windows.length * 20, window.innerHeight - baseHeight - 100),
-      width: Math.min(baseWidth, window.innerWidth - 100),
-      height: Math.min(baseHeight, window.innerHeight - 150)
+      x: spawn.x,
+      y: spawn.y,
+      width: spawn.width,
+      height: spawn.height
     }
+
     setWindows([...windows, newWindow])
   }
 
