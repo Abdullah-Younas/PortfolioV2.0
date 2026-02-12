@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Page, Text } from '@react-pdf/renderer';
+import { Document, Page, Text, Link } from '@react-pdf/renderer';
 import { styles } from './Pstyles';
 import './Pfonts';
 
@@ -9,6 +9,7 @@ const PongFusion = () => (
 
       <Text style={styles.title}>Pong Fusion</Text>
       <Text style={styles.author}>Java — University First Year Project</Text>
+      <Link src="https://smokashi.itch.io/pong-fusion" style={styles.projectLink}>View Project →</Link>
 
       <Text style={styles.subtitle}>
         Concept & Motivation

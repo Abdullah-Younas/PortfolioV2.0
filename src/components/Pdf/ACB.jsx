@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Page, Text } from '@react-pdf/renderer';
+import { Document, Page, Text, Link } from '@react-pdf/renderer';
 import { styles } from './Pstyles';
 import './Pfonts';
 
@@ -9,6 +9,7 @@ const ACB = () => (
 
       <Text style={styles.title}>ACB Adult Content Blocker</Text>
       <Text style={styles.author}>Desktop App & Chrome Extension</Text>
+      <Link src="https://github.com/Abdullah-Younas/ACBExtension/" style={styles.projectLink}>View Project →</Link>
 
       <Text style={styles.subtitle}>
         Project Overview

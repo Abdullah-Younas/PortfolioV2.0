@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Page, Text } from '@react-pdf/renderer';
+import { Document, Page, Text, Link } from '@react-pdf/renderer';
 import { styles } from './Pstyles';
 import './Pfonts';
 
@@ -9,6 +9,7 @@ const GENG = () => (
 
       <Text style={styles.title}>GENG</Text>
       <Text style={styles.author}>C++ OpenGL Graphics Engine – Work in Progress</Text>
+      <Link src="https://x.com/younas34035" style={styles.projectLink}>View Project →</Link>
 
       <Text style={styles.subtitle}>
         Overview

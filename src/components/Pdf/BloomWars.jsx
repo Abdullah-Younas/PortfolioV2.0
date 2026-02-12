@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Page, Text, Image } from '@react-pdf/renderer';
+import { Document, Page, Text, Image, Link } from '@react-pdf/renderer';
 import { styles } from './Pstyles';
 import './Pfonts';
 
@@ -9,6 +9,7 @@ const BloomWars = () => (
 
       <Text style={styles.title}>Bloom Wars</Text>
       <Text style={styles.author}>A Godot Game Jam Project</Text>
+      <Link src="https://smokashi.itch.io/bloom-wars" style={styles.projectLink}>View Project →</Link>
 
       <Text style={styles.subtitle}>
         Concept & Origin

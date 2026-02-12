@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Page, Text } from '@react-pdf/renderer';
+import { Document, Page, Text, Link } from '@react-pdf/renderer';
 import { styles } from './Pstyles';
 import './Pfonts';
 
@@ -9,6 +9,7 @@ const Turfist = () => (
 
       <Text style={styles.title}>Turfist Prototype</Text>
       <Text style={styles.author}>Unreal Engine — Physics Arcade Prototype</Text>
+      <Link src="https://smokashi.itch.io/turfist" style={styles.projectLink}>View Project →</Link>
 
       <Text style={styles.subtitle}>
         Concept
