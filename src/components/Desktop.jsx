@@ -12,7 +12,6 @@ import Smochat from './Pdf/Smochat';
 import Whispern from './Pdf/Whispern';
 import Pong from './games/Pong';
 import Snake from './games/Snake';
-import Nuxply from './Pdf/Nuxply';
 import { PDFViewer } from '@react-pdf/renderer'
 
 // Memoized PDF Component to prevent re-renders
@@ -30,7 +29,6 @@ const MemoizedPDFViewer = memo(({ fileId }) => {
       case 11: return <Haze />
       case 12: return <PongFusion />
       case 14: return <GENG />
-      case 15: return <Nuxply />
       default: return null
     }
   }, [fileId])
@@ -96,7 +94,6 @@ function Desktop() {
       { id: 7, name: 'Whispern', language: 'React', rarity: 3, date: '2025-07-05' },
       { id: 8, name: 'Boardify', language: 'React', rarity: 2, date: '2025-04-18' },
       { id: 9, name: 'Smochat', language: 'React', rarity: 5, date: '2024-10-01' },
-      { id: 15, name: 'Nuxply', language: 'React, Supabase, AI', rarity: 5, date: '2026-04-01' }
     ],
     'Game Projects': [
       { id: 10, name: 'BloomWars', language: 'Godot', rarity: 5, date: '2025-08-16' },
