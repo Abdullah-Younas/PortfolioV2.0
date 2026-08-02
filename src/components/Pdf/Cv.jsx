@@ -43,12 +43,6 @@ const Cv = () => (
       <Text style={styles.subtitle}>Projects</Text>
 
       <View style={styles.projectItem}>
-        <Text style={styles.projectTitle}>• Nuxply  [React, Supabase, Claude AI, Make.com, Lemon Squeezy]</Text>
-        <Text style={styles.projectDesc}>AI-powered job matching SaaS built entirely solo from scratch. Automatically scans thousands of job listings every morning, scores each against the user's skills using Claude AI, and delivers only 70%+ matches with personalized cover letters ready to send. Features CV upload with AI auto-extraction, subscription billing via Lemon Squeezy with webhook handling, Supabase Row Level Security policies, pg_cron scheduled credit resets, Vercel serverless functions, and a full React dashboard. Acquired real users within weeks of launch.</Text>
-        <Link src="https://nuxply.com/" style={styles.projectLink}>View Project →</Link>
-      </View>
-
-      <View style={styles.projectItem}>
         <Text style={styles.projectTitle}>• Smochat  [React, Firebase]</Text>
         <Text style={styles.projectDesc}>Real-time chat application with Google authentication for quick user onboarding, fast responsive UI optimized for mobile and desktop use, comprehensive group management including public and private channels, real-time message synchronization across all connected clients, and user presence indicators showing who's currently active. Built as a prototype for a client who needed simple team communication without the complexity of mainstream platforms.</Text>
         <Link src="https://smochat.pages.dev/" style={styles.projectLink}>View Project →</Link>
@@ -141,7 +135,6 @@ const Cv = () => (
       </Text>
 
       <Text style={styles.subtitle}>Achievements</Text>
-      <Text style={styles.bullet}>• Built and launched Nuxply, a fully functional AI-powered SaaS product with real users and subscription payments, designed and developed entirely solo from database architecture to payment integration to AI automation pipeline.</Text>
       <Text style={styles.bullet}>• Keyboard Cowboys became a significant hit among classmates and friends for its fast-paced gameplay that made typing practice competitive and enjoyable, leading to informal tournaments and persistent requests for new features.</Text>
       <Text style={styles.bullet}>• Smochat gained widespread adoption among students for casual real-time chat, becoming the preferred communication tool for group projects and social coordination, with daily active users consistently using the platform for both academic and personal conversations.</Text>
       <Text style={styles.bullet}>• Sencdec ensured secure encryption and decryption of files in school environments and peer-to-peer usage, with classmates relying on it to share sensitive documents and personal files safely without trusting third-party services.</Text>
